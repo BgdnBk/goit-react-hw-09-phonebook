@@ -1,0 +1,59 @@
+.container {
+  /* display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between; */
+  width: 500px;
+  min-height: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-radius: 5%;
+  /* background-color: #36279c; */
+  background-image: url(https://epsvector.ru/uploads/posts/2013-03/1362598573_bloknot-v-vektore.jpg);
+  background-repeat: no-repeat;
+  /* color: black; */
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.contactList {
+  display: flex;
+  justify-content: center;
+}
+
+.btnList {
+  min-width: 120px;
+  background-color: #8ea32e;
+  margin-left: 10px;
+  border-radius: 4px;
+  border: none;
+}
+
+.table {
+  border: solid 1px black;
+}
+
+.enter {
+  opacity: 0;
+  transform: scale(0.1);
+}
+
+.enterActive {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 250ms linear;
+}
+.exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.exitActive {
+  opacity: 0;
+  transform: scale(0.1);
+  transition: all 250ms linear;
+}
