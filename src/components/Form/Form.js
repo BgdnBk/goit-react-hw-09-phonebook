@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import shortid from "shortid";
 import s from "../Form/Form.module.css";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import phonebookOperations from "../../redux/phonebook/phonebook-operation";
+import phonebookSelector from "../../redux/phonebook/phonebook-selector";
 
 export default function Form() {
   const [newName, setNewName] = useState("");
   const [number, setNumber] = useState("");
 
   const dispatch = useDispatch();
+
+  const contactList = useSelector(phonebookSelector.getAllContacts);
 
   useEffect(() => {
     dispatch(phonebookOperations.fetchContacts());
@@ -42,9 +45,14 @@ export default function Form() {
     onSubmit({
       newName,
       number,
+      contactList,
     });
 
     resetInputValues();
+  };
+
+  const checkName = (contactList, newName) => {
+    return contactList?.some(({ name }) => name === newName);
   };
 
   const onSubmit = (newName, number, contactList) => {
@@ -52,10 +60,6 @@ export default function Form() {
       return toast.error("Это имя уже существует");
     }
     dispatch(phonebookOperations.addContact(newName, number));
-  };
-
-  const checkName = (contactList, newName) => {
-    return contactList?.some(({ name }) => name === newName);
   };
 
   const resetInputValues = () => {
