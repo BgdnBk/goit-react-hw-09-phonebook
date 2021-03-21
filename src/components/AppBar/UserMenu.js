@@ -1,23 +1,22 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { authSelectors, authOperations } from "../../redux/auth";
 import s from "../../components/AppBar/Phonebook.module.css";
 
-const UserMenu = ({ name, onLogout }) => (
-  <div>
-    <span className={s.Navlink}>Добро пожаловать, {name}</span>
-    <button type="button" onClick={onLogout}>
-      Выйти
-    </button>
-  </div>
-);
+export default function UserMenu() {
+  const dispatch = useDispatch();
+  const name = useSelector(authSelectors.getUserName);
 
-const mapStateToProps = (state) => ({
-  name: authSelectors.getUserName(state),
-});
+  const onLogout = useCallback(() => {
+    dispatch(authOperations.logout());
+  }, [dispatch]);
 
-const mapDispatchToProps = {
-  onLogout: authOperations.logout,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+  return (
+    <div>
+      <span className={s.Navlink}>Добро пожаловать, {name}</span>
+      <button type="button" onClick={onLogout}>
+        Выйти
+      </button>
+    </div>
+  );
+}

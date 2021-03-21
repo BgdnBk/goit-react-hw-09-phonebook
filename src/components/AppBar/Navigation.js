@@ -1,17 +1,18 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import authSelectors from "../../redux/auth/auth-selectors";
 import s from "../../components/AppBar/Phonebook.module.css";
 
-function Navigation({ isAuthenticated }) {
+export default function Navigation() {
+  const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
   return (
     <div>
       <NavLink exact to="/" className={s.Navlink}>
         Главная
       </NavLink>
 
-      {isAuthenticated && (
+      {isLoggedIn && (
         <NavLink exact to="/contacts" className={s.Navlink}>
           Контакты
         </NavLink>
@@ -19,9 +20,3 @@ function Navigation({ isAuthenticated }) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: authSelectors.getIsAuthenticated(state),
-});
-
-export default connect(mapStateToProps)(Navigation);
