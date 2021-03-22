@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import shortid from "shortid";
-import s from "../Filter/Filter.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import * as phonebookAction from "../../redux/phonebook/phonebook-action";
 import phonebookSelector from "../../redux/phonebook/phonebook-selector";
+import s from "../Filter/Filter.module.css";
 
 export default function Filter() {
   const id = shortid.generate();

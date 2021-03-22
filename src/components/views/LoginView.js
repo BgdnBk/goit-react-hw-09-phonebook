@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
 import { authOperations } from "../../redux/auth";
 import s from "../AppBar/Phonebook.module.css";
 
-export default function LoginView({ onLogin }) {
+export default function LoginView() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,8 +26,6 @@ export default function LoginView({ onLogin }) {
     dispatch(authOperations.login({ email, password }));
 
     resetLogin();
-
-    // this.setState({ name: "", email: "", password: "" });
   };
 
   const resetLogin = () => {

@@ -28,25 +28,21 @@ export default function Phonebook() {
       <ToastContainer autoClose={3000} />
       <Suspense fallback={<p>Сейчас всё будет</p>}>
         <Switch>
-          <PublicRoute exact path="/" component={HomeView} />
-          <PublicRoute
-            path="/registration"
-            restricted
-            redirectTo="/contacts"
-            component={RegistrView}
-          />
-          <PublicRoute
-            path="/login"
-            restricted
-            redirectTo="/contacts"
-            component={LoginView}
-          />
-          <PrivateRoute
-            exact
-            path="/contacts"
-            redirectTo="/login"
-            component={ContactsView}
-          />
+          <PublicRoute exact path="/">
+            <HomeView />
+          </PublicRoute>
+
+          <PublicRoute path="/registration" restricted redirectTo="/contacts">
+            <RegistrView />
+          </PublicRoute>
+
+          <PublicRoute path="/login" restricted redirectTo="/contacts">
+            <LoginView />
+          </PublicRoute>
+
+          <PrivateRoute exact path="/contacts" redirectTo="/login">
+            <ContactsView />
+          </PrivateRoute>
         </Switch>
       </Suspense>
     </div>

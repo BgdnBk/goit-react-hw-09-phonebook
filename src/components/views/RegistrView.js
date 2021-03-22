@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { authOperations } from "../../redux/auth";
 import s from "../AppBar/Phonebook.module.css";
 
-export default function RegistrView({ onLogin }) {
+export default function RegistrView() {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,14 +26,13 @@ export default function RegistrView({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onLogin(this.state);
+    dispatch(authOperations.register({ name, email, password }));
 
     resetLogin();
-
-    // this.setState({ name: "", email: "", password: "" });
   };
 
   const resetLogin = () => {
+    setName("");
     setEmail("");
     setPassword("");
   };
